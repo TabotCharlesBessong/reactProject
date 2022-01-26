@@ -1,14 +1,14 @@
 
 import React from 'react'
-import {makeStyles} from "@material-ui/core"
+// import {makeStyles} from "@material-ui/core"
 import Cell from './Cell'
 
-const useStyles = makeStyles((theme)=>({
+// const useStyles = makeStyles((theme)=>({
 
-}))
+// }))
 
 const Stage = ({stage}) => {
-  const classes = useStyles()
+  // const classes = useStyles()
 
   return (
     <>

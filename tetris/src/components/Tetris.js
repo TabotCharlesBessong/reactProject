@@ -1,17 +1,17 @@
 
 import React from 'react'
-import {makeStyles} from "@material-ui/core"
+// import {makeStyles} from "@material-ui/core"
 import Stage from './Stage'
 import Display from './Display'
 import Start from './Start'
 import { createStage } from '../GameHelper'
 
-const useStyles = makeStyles((theme)=>({
+// const useStyles = makeStyles((theme)=>({
 
-}))
+// }))
 
 const Tetris = () => {
-  const classes = useStyles()
+  // const classes = useStyles()
 
   
   return (
@@ -20,7 +20,7 @@ const Tetris = () => {
         stage={createStage()}
       />
       <aside>
-      <div className={classes}>
+      <div >
         <Display text="Score" />
         <Display text="Rows" />
         <Display text="Level" />

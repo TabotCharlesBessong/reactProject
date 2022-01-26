@@ -1,17 +1,17 @@
 
 import React from 'react'
-import {makeStyles} from "@material-ui/core"
+// import {makeStyles} from "@material-ui/core"
 
-const useStyles = makeStyles((theme)=>({
+// const useStyles = makeStyles((theme)=>({
 
-}))
+// }))
 
 const Display = ({gameOver,text}) => {
-  const classes = useStyles()
+  // const classes = useStyles()
 
   return (
     <>
-      <div className={classes}>
+      <div >
         {text}
       </div>
     </>

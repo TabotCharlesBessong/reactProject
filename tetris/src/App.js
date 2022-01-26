@@ -1,15 +1,15 @@
 import React from 'react';
 import Tetris from './components/Tetris';
-import {makeStyles} from "@material-ui/core"
+// import {makeStyles} from "@material-ui/core"
 
-const useStyles = makeStyles((theme)=>({
+// const useStyles = makeStyles((theme)=>({
 
-}))
+// }))
 
 
 const App = () => {
 
-  const classes = useStyles()
+  // const classes = useStyles()
   return (
      <>
        <Tetris/>
