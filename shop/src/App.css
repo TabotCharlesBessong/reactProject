@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(16rem,1fr));
+  /* grid-template-rows: repeat(auto-fill,minmax(16rem,1fr)); */
+  /* gap: 1rem 2rem; */
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-body{
+  width: 100%;
+}
