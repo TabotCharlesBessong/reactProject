@@ -2,10 +2,13 @@
 import React from 'react';
 import millfy from 'millify'
 import { Col, Row, Statistic, Typography } from 'antd';
+// import { useGetCryptoQuery } from '../services/CryptoApi';
 
 const {Title} = Typography
 
 const Homepage = () => {
+  // const {data,isFetching} = useGetCryptoQuery()
+  // console.log(data,'hello');
   return (
     <>
       <Title level={2} className='heading' >
