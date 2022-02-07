@@ -11,9 +11,14 @@ const Header = () => {
   return (
     <div className="header-container">
       <div className="header">
-        <div className="header-logo">
-          Xpenser <CreditCardIcon className='icon' />
-        </div>
+        
+        <Link to='/'>
+          <div className="header-logo">
+            Xpenser <CreditCardIcon className='icon' />
+          </div>
+
+        </Link>
+          
         <div className="header-btn">
           <a href='https://github.com/TabotCharlesBessong' target="_blank" rel="noopener noreference"  >
             <GithubIcon className='icon' />
