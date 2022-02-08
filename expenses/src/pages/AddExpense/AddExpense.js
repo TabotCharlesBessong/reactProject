@@ -1,9 +1,12 @@
 
 import React from 'react';
+import TopFold from '../../components/TopFold/TopFold';
 
 const AddExpense = () => {
   return (
-    <h1>Hello world</h1>
+    <div className="">
+      <TopFold/>
+    </div>
   );
 };
 
