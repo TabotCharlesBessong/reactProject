@@ -1,0 +1,16 @@
+.add-xpense{
+  width: 50%;
+  margin: auto;
+}
+
+@media only  screen and (max-width:1024px){
+  .add-xpense{
+    width: 90%;
+  }
+}
+
+@media only  screen and (max-width:512px){
+  .add-xpense{
+    width: 100%;
+  }
+}
