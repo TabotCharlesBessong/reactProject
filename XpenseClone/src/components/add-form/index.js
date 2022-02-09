@@ -53,10 +53,11 @@ const AddForm = () => {
       <SuccessModal modalOpen={modalOpen} />
       <ToastContainer
         position="bottom-left"
-        autoClose={1500}
+        autoClose={2500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
+        draggable
       />
       <div className="form-item">
         <label>Title</label>
@@ -67,7 +68,7 @@ const AddForm = () => {
         />
       </div>
       <div className="form-item">
-        <label>Amount ₹</label>
+        <label>Amount $</label>
         <input
           placeholder="Enter Amount"
           className="amount-input"
