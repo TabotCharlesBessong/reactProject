@@ -12,10 +12,11 @@ const ExpenseList = () => {
     <div className="expense-list">
       <ToastContainer
         position="bottom-left"
-        autoClose={1500}
+        autoClose={3500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
+        draggable
       />
       {filteredList.length ? (
         filteredList.map((item) => (
