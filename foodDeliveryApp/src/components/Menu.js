@@ -2,16 +2,16 @@
 import React from 'react';
 import '../App.css'
 
-const Menu = ({link,icon , text}) => {
+const Menu = ({link,icon  , isHome}) => {
   return (
-    <li>
+    <li className={isHome ? 'active':'' } >
       <a href={link}>
         <span className='icon' >
           {icon}
         </span>
       </a>
       <h5>
-        {text}
+        {/* {text} */}
       </h5>
     </li>
   );
