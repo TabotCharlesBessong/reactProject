@@ -4,6 +4,8 @@ import './App.css';
 import BannerName from './components/BannerName';
 import Header from './components/Header';
 import Menu from './components/Menu';
+import MenuCard from './components/MenuCard';
+import SubMenu from './components/SubMenu';
 import img1 from './food/avulionAgents (1).jpg'
 import img2 from './food/avulionAgents (6).jpg'
 // import img1 from '../food/avulionAgents (1).jpg'
@@ -37,6 +39,20 @@ function App() {
             <div className="banner">
               <BannerName name={"Charles"} discount={30} link={'#'}  />
               <img src={img1} alt="" className='delivery-pic' />
+            </div>
+            {/* dish */}
+            <div className="dish-container">
+              <div className="menu-card">
+                <SubMenu name={"Menu Category"} />
+              </div>
+              <div className="row-container">
+                <div className="">
+                  <MenuCard imgSrc={} name={"Burger"} />
+                </div>
+              </div>
+              <div className="dish-item-container">
+
+              </div>
             </div>
           </div>
 

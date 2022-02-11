@@ -160,15 +160,15 @@ main{
   align-items: center;
   padding: 0 10px;
   /* margin-top: -2rem; */
-  top: 2.5rem;
+  /* top: 2.5rem; */
 }
 .delivery-pic{
   position: absolute;
-  right: -60px;
+  right: -60px; 
   bottom: -10px;
   width: 240px;
   object-fit: cover;
-  top: 12px;
+  /* top: 12px; */
 }
 .banner-content{
   padding: 8px;
@@ -313,3 +313,44 @@ main{
   transform: translateX(calc(60px * 4));
 }
 /* edn of the bottom menu */
+
+/* start of dish container */
+.dish-container{
+  width: 100%;
+  padding: 10px 0;
+}
+.menu-card{
+  width: 100%;
+}
+/* .sub-menu-container{ */
+  /* position: relative; */
+  /* top: 24px; */
+/* } */
+.sub-menu-container , .view-all{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub-menu-container h3{
+  font-size: 16px;
+  font-weight: 600;
+  color: #2a2b3c;
+}
+
+.sub-menu-container .view-all p{
+  font-size: 12px;
+  color: #f8890c;
+  font-weight: 400;
+}
+.sub-menu-container .view-all .icon{
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: #f8890c;
+  min-width: 20px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+}
+/* end of dish container */
