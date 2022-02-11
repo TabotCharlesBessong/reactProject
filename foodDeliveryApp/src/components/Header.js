@@ -1,43 +1,56 @@
+import {
+  BarChart,
+  SearchRounded,
+  ShoppingCartRounded,
+} from "@mui/icons-material";
+import React, { useEffect } from "react";
+import { useStateValue } from "./StateProvider";
 
-import React from 'react';
-import { BarChart, SearchRounded, ShoppingCartRounded} from "@material-ui/icons"
-import '../App.css'
-import img1 from '../food/food1 (1).jpg'
-import img2 from '../food/food1 (2).jpg'
-import img3 from '../food/food1 (3).jpg'
-import img4 from '../food/food1 (4).jpg'
+function Header() {
+  const [{ cart }, dispatch] = useStateValue();
 
-// import './App.css'
+  useEffect(() => {
+    const toggleIcon = document.querySelector(".toggleMenu");
+    toggleIcon.addEventListener("click", () => {
+      document.querySelector(".rightMenu").classList.toggle("active");
+    });
+  }, []);
 
-const Header = () => {
-  return(
+  return (
     <header>
-      <img src={img1} alt=""
-      className='logo'
-       />
-      <div className="input-box">
-        <SearchRounded className='search-icon' />
-        <input type="text" placeholder='search' />
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Flogo.png?alt=media&token=fc228623-ef27-4af4-8ea5-b9ebeeaf47dc"
+        alt=""
+        className="logo"
+      />
+
+      <div className="inputBox">
+        <SearchRounded className="searchIcon" />
+        <input type="text" placeholder="Search" />
       </div>
-      <div className="shopping-cart">
-        <ShoppingCartRounded className='cart'/>
-        <div className="cart-content">
-          <p> 2 </p>
+
+      <div className="shoppingCart">
+        <ShoppingCartRounded className="cart" />
+        <div className={`${!cart ? "noCartItem" : "cart_content"}`}>
+          <p>{cart ? cart.length : ""}</p>
         </div>
       </div>
 
-      <div className="profile-container">
-        <div className="img-box">
-          <img src={img2} className='profile-pic' alt="" />
+      <div className="profileContainer">
+        <div className="imgBox">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fprofile.jpg?alt=media&token=36821495-39b9-4145-bde3-16c47c6ff937"
+            alt=""
+          />
         </div>
-        <h2 className="username">Charles Tabot</h2>
+        <h2 className="userName">Vetrivel Ravi</h2>
       </div>
 
-      <div className="toggle-menu">
-        <BarChart className='toggle-icon' />
+      <div className="toggleMenu">
+        <BarChart className="toggleIcon" />
       </div>
     </header>
-    );
-};
+  );
+}
 
 export default Header;

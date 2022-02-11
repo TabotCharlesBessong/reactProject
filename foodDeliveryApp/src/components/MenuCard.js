@@ -1,17 +1,18 @@
+import { ChevronRightRounded } from "@mui/icons-material";
+import React from "react";
 
-import { ChevronRightRounded } from '@material-ui/icons';
-import React from 'react';
-
-const MenuCard = ({imgSrc,name}) => {
+function MenuCard({ imgSrc, name, isActive }) {
   return (
-    <div className="row-menu-card">
-      <div className="img-box">
-        <img src={imgSrc} alt={name} />
-        <h3>{name}</h3>
-        <ChevronRightRounded className='loading' />
+    <div className={`rowMenuCard ${isActive ? `active` : ``}`}>
+      <div className="imgBox">
+        <img src={imgSrc} alt="" />
       </div>
+      <h3>{name}</h3>
+      <i className="loadMenu">
+        <ChevronRightRounded />
+      </i>
     </div>
   );
-};
+}
 
 export default MenuCard;
