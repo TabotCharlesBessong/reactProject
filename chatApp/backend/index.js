@@ -10,7 +10,12 @@ const router = require('./router')
 
 io.on('connection',(socket)=>{
   console.log('we have a connection!!!');
-  socket.on('disconnect',()=>{
+
+  socket.on('join',({name,room})=>{
+    console.log(name,room);
+  })
+
+  socket.on('disconnect',() => {
     console.log('User just left!!');
   })
 })
