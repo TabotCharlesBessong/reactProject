@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "hapi": "^18.1.0",
+    "http": "0.0.1-security",
     "jshint": "^2.13.1",
     "mongodb": "^4.2.1",
     "mongoose": "^6.1.4",
