@@ -3,9 +3,11 @@ import React from 'react'
 import './_sidebar.scss'
 import {MdSubscriptions,MdExitToApp,MdThumbUp,MdHistory,MdLibraryBooks,MdMore,MdSentimentDissatisfied,MdHome} from 'react-icons/md'
 
-const Sidebar = ({sidebar,setSidebar}) => {
+const Sidebar = ({sidebar,setSidebar,handleToggle}) => {
   return (
-    <nav className={sidebar? 'sidebar open':'sidebar' } >
+    <nav className={sidebar? 'sidebar open':'sidebar' }
+    onClick = {()=> handleToggle(false)}
+     >
       <li>
         <MdHome size={23}/>
         <span>Home</span>

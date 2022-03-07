@@ -6,7 +6,7 @@ import Video from '../../components/Video/Video'
 
 const Homescreen = () => {
   return (
-    <Container>
+    <Container className='mt-20' >
       <Category/>
       <Row>
         {
