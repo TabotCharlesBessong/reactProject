@@ -3,9 +3,9 @@ import React from 'react'
 import './_sidebar.scss'
 import {MdSubscriptions,MdExitToApp,MdThumbUp,MdHistory,MdLibraryBooks,MdMore,MdSentimentDissatisfied,MdHome} from 'react-icons/md'
 
-const Sidebar = () => {
+const Sidebar = ({sidebar,setSidebar}) => {
   return (
-    <nav className='border border-danger  sidebar' >
+    <nav className={sidebar? 'sidebar open':'sidebar' } >
       <li>
         <MdHome size={23}/>
         <span>Home</span>

@@ -8,12 +8,13 @@ import yt from '../../images/yt.png'
 import avatar from '../../images/avatar.png'
 
 
-const Header = () => {
+const Header = ({handleToggle}) => {
   return (
     <div className='border border-dark header' >
       <FaBars
       className='header__menu' 
       size={26} 
+      onClick={()=> handleToggle() }
       />
       <img src={yt} width='24px' height='24px' alt="" className="header__logo" />
       <form action="">
