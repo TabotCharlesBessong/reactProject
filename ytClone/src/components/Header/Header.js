@@ -1,10 +1,10 @@
 
 import React from 'react'
-import './_sidevar.scss'
+import './_header.scss'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div className='border border-dark' >Header</div>
   )
 }
 
