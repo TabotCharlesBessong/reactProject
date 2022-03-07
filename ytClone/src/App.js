@@ -59,5 +59,6 @@ function App() {
     </>
   );
 }
+// npm install -g firebase-tools
 
 export default App;
