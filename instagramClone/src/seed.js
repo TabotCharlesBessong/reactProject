@@ -11,6 +11,7 @@ export function seedDatabase(firebase) {
 			following: ["2"],
 			followers: ["2", "3", "4"],
 			dateCreated: Date.now(),
+			password:'12345678'
 		},
 		{
 			userId: "2",
@@ -20,6 +21,7 @@ export function seedDatabase(firebase) {
 			following: [],
 			followers: ["28z6W5QxmvdSBBeOCYb8nO1j2J22"],
 			dateCreated: Date.now(),
+			password:'12334678'
 		},
 		{
 			userId: "3",
@@ -29,6 +31,7 @@ export function seedDatabase(firebase) {
 			following: [],
 			followers: ["28z6W5QxmvdSBBeOCYb8nO1j2J22"],
 			dateCreated: Date.now(),
+			password:'13283678'
 		},
 		{
 			userId: "4",
@@ -38,6 +41,7 @@ export function seedDatabase(firebase) {
 			following: [],
 			followers: ["28z6W5QxmvdSBBeOCYb8nO1j2J22"],
 			dateCreated: Date.now(),
+			password:'123487378'
 		},
 	];
 
