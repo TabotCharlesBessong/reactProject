@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
-import { doesUsernameExist } from '../services/firebase';
+import { doesUsernameExist,doesEmailAddressExist } from '../services/firebase';
 import iphone from "../assets/images/iphone-with-profile.jpg";
 import logo from '../assets/images/logo.png'
 
@@ -22,7 +22,8 @@ const Signup = () => {
     event.preventDefault();
 
     const usernameExists = await doesUsernameExist(username);
-    if (!usernameExists) {
+    const emailExist = await doesEmailAddressExist(emailAddress)
+    if (!usernameExists  && !emailExist) {
       try {
         const createdUserResult = await firebase
           .auth()
@@ -48,7 +49,7 @@ const Signup = () => {
             dateCreated: Date.now()
           });
 
-        history.push(ROUTES.DASHBOARD);
+        history.push(ROUTES.LOGIN);
       } catch (error) {
         setFullName('');
         setEmailAddress('');
@@ -57,7 +58,8 @@ const Signup = () => {
       }
     } else {
       setUsername('');
-      setError('That username is already taken, please try another.');
+      setEmailAddress('')
+      setError('That username or email address is already taken, please try another.');
     }
   };
 
