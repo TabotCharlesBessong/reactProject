@@ -1,14 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState,lazy,Suspense } from 'react'
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+import * as ROUTES from './constants/routes'
+// import { Login } from './pages'
+const Login = lazy(() => import ('./pages/Login'))
+const Signup = lazy(() => import ('./pages/Signup'))
+const Home = lazy(() => import ('./pages/Home'))
 // import './index.css'
 
-function App() {
+const  App = () => {
   return (
-    <div className="App">
-      <h3 className="text-4xl text-blue-600 text-center font-bold">
-        hello pals
-      </h3>
-    </div>
+    <Router>
+      <h2 className='text-4xl text-blue-500 text-center' >Hello the world</h2>
+      <Suspense fallback={<p>Loading...</p>} />
+      <Switch>
+        <Route path={ROUTES.LOGIN} component={Login} />
+        <Route path={ROUTES.SIGNUP} component={Signup} />
+        <Route exact path={ROUTES.DASHBOARD} component={Home} />
+      </Switch>
+    </Router>
   )
 }
 
