@@ -23,6 +23,8 @@ const Signup = () => {
 
     const usernameExists = await doesUsernameExist(username);
     const emailExist = await doesEmailAddressExist(emailAddress)
+
+    // verifying wether email and password already exist 
     if (!usernameExists  && !emailExist) {
       try {
         const createdUserResult = await firebase
@@ -59,6 +61,7 @@ const Signup = () => {
     } else {
       setUsername('');
       setEmailAddress('')
+      // showing error to the user
       setError('That username or email address is already taken, please try another.');
     }
   };
