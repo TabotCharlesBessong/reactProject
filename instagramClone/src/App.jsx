@@ -14,7 +14,7 @@ const  App = () => {
       <Suspense fallback={<p>Loading...</p>} />
       <Switch>
         <Route path={ROUTES.LOGIN} component={Login} />
-        <Route path={ROUTES.SIGNUP} component={Signup} />
+        <Route path={ROUTES.SIGN_UP} component={Signup} />
         <Route exact path={ROUTES.DASHBOARD} component={Home} />
       </Switch>
     </Router>
