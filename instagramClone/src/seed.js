@@ -1,5 +1,6 @@
 /* eslint-disable no-plusplus */
 // NOTE: replace 'NvPY9M9MzFTARQ6M816YAzDJxZ72' with your Firebase auth user id (can be taken from Firebase)
+// projectID === twitter-react-3371b
 export function seedDatabase(firebase) {
 	const users = [
 		{
