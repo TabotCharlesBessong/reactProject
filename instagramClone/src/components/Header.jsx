@@ -8,9 +8,8 @@ import useUser from "../hooks/useUser";
 import logo from '../assets/images/logo.png'
 
 const Header = () => {
-	// const { user: loggedInUser } = useContext(UserContext);
-	// const { user } = useUser(loggedInUser?.uid);
-  const {user} = useContext(UserContext)
+	const { user: loggedInUser } = useContext(UserContext);
+	const { user } = useUser(loggedInUser?.uid);
 	const { firebase } = useContext(FirebaseContext);
 	const history = useHistory();
   console.log(user)
@@ -31,7 +30,7 @@ const Header = () => {
 						</h1>
 					</div>
 					<div className="text-gray-700 text-center flex items-center align-items">
-						{user ? (
+						{loggedInUser ? (
 							<>
 								<Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
 									<svg
