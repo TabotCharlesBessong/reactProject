@@ -1,12 +1,20 @@
 
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
+import { Header, Sidebar, Timeline } from '../components'
+
 const Home = () => {
 
   useEffect(()=> {
-    document.title = 'Home Instagram'
+    document.title = 'Instagram'
   },[])
   return(
-    <div>Home Page</div>
+    <div className='bg-gray-background'>
+      <Header/>
+      <div className="grid">
+        <Timeline/>
+        <Sidebar/>
+      </div>
+    </div>
   )
 }
 
