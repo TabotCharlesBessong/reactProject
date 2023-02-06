@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 import { doesUsernameExist,doesEmailAddressExist } from '../services/firebase';
@@ -7,7 +7,7 @@ import iphone from "../assets/images/iphone-with-profile.jpg";
 import logo from '../assets/images/logo.png'
 
 const Signup = () => {
-  const history = useHistory();
+  const navigateTo = useNavigate()
   const { firebase } = useContext(FirebaseContext);
 
   const [username, setUsername] = useState('');
@@ -51,7 +51,7 @@ const Signup = () => {
             dateCreated: Date.now()
           });
 
-        history.push(ROUTES.LOGIN);
+        navigateTo(ROUTES.LOGIN);
       } catch (error) {
         setFullName('');
         setEmailAddress('');

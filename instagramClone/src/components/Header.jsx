@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
 import UserContext from "../context/user";
 import * as ROUTES from "../constants/routes";
@@ -11,7 +11,7 @@ const Header = () => {
 	const { user: loggedInUser } = useContext(UserContext);
 	const { user } = useUser(loggedInUser?.uid);
 	const { firebase } = useContext(FirebaseContext);
-	const history = useHistory();
+	const navigateTo = useNavigate()
   console.log(user)
 
 	return (
@@ -54,12 +54,12 @@ const Header = () => {
 									title="Sign Out"
 									onClick={() => {
 										firebase.auth().signOut();
-										history.push(ROUTES.LOGIN);
+										navigateTo(ROUTES.LOGIN);
 									}}
 									onKeyDown={(event) => {
 										if (event.key === "Enter") {
 											firebase.auth().signOut();
-											history.push(ROUTES.LOGIN);
+											navigateTo(ROUTES.LOGIN);
 										}
 									}}
 								>
