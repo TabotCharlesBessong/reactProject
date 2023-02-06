@@ -4,17 +4,14 @@ import * as ROUTES from './constants/routes'
 import UserContext from './context/user'
 import useAuthListener from './hooks/useAuthListener'
 import { Login,Signup,Home,NotFound } from './pages'
-// const Login = lazy(() => import ('./pages/Login'))
-// const Signup = lazy(() => import ('./pages/Signup'))
-// const Home = lazy(() => import ('./pages/Home'))
-// const NotFound = lazy(() => import("./pages/NotFound"));
-// import './index.css'
+import { Header } from './components'
 
 const  App = () => {
   const {user} = useAuthListener
   return (
 		<UserContext.Provider value={{ user }}>
 			<Router>
+			  <Header/>
 				{/* <Suspense fallback={<p>Loading...</p>} /> */}
 				<Routes>
 					<Route path={ROUTES.LOGIN} element={<Login/>} />
