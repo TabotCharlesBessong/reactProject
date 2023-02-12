@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import { BrowserRouter as Router , Route,Routes } from 'react-router-dom'
-import { ForgotPassword, Home, Offers, Profile, Signin, Signup } from './pages'
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Header } from "./components";
+import { ForgotPassword, Home, Offers, Profile, Signin, Signup } from "./pages";
 
 function App() {
-
-  return (
+	return (
 		<Router>
+			<Header />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="signin" element={<Signin />} />
@@ -21,4 +22,4 @@ function App() {
 	);
 }
 
-export default App
+export default App;
