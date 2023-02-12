@@ -1,8 +1,10 @@
+import { getAuth,createUserWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { OAuth } from "../components";
+// import { db } from "../firebase";
 
 const Signup = () => {
 	const [formData, setFormData] = useState({
@@ -11,6 +13,8 @@ const Signup = () => {
 		password: "",
     cpassword:""
 	});
+	const [error, setError] = useState('')
+	const [match, setMatch] = useState(false)
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleChange = (e) => {
@@ -19,6 +23,28 @@ const Signup = () => {
 			[e.target.id]: e.target.value,
 		}));
 	};
+
+	const handleSubmit = async (e) => {
+    e.preventDefault()
+		if(formData.password !== formData.cpassword){
+			setMatch(true)
+			setError('Password must match')
+			return
+		}else{
+			setMatch(false)
+			setError('')
+		}
+
+		try {
+			const auth = getAuth()
+			const landlordCredentials = await createUserWithEmailAndPassword(auth,formData.email,formData.password)
+			const landlord = tenantCredentials.landlord
+			console.log(landlord)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	// console.log(error,match)
 	return (
 		<section>
 			<h1 className="text-3xl text-center mt-6 font-bold">Sign Up</h1>
@@ -31,7 +57,7 @@ const Signup = () => {
 					/>
 				</div>
 				<div className="w-full md:w-[67%] lg:w-[40%]">
-					<form>
+					<form onSubmit={handleSubmit} >
 						<input
 							className="w-full px-4 py-2 text-xl text-gray-700 bg-white mb-5 rounded-lg border-gray-300 transition ease-in-out text-center"
 							type="text"
@@ -88,6 +114,11 @@ const Signup = () => {
 									<AiFillEyeInvisible fontSize={24} />
 								)}
 							</div>
+							{
+								match ? <div className="text-center text-red-600 text-2xl my-2">
+									{error}
+								</div> : ''
+							}
 						</div>
 						<div className="flex justify-between whitespace-nowrap text-sm sm:text-lg">
 							<p className="mb-6">
