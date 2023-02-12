@@ -1,12 +1,24 @@
 import { useState } from 'react'
+import { BrowserRouter as Router , Route,Routes } from 'react-router-dom'
+import { ForgotPassword, Home, Offers, Profile, Signin, Signup } from './pages'
 
 function App() {
 
   return (
-    <div className='container' >
-      <h1 className='text-4xl text-center text-underline text-green-400' >Hello world</h1>
-    </div>
-  )
+		<Router>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="signin" element={<Signin />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route path="/offers" element={<Offers />} />
+				<Route path="/profile" element={<Profile />} />
+				<Route path="/forgot" element={<ForgotPassword />} />
+				{/* <Route path="" element={<Home />} />
+				<Route path="" element={<Home />} />
+				<Route path="" element={<Home />} /> */}
+			</Routes>
+		</Router>
+	);
 }
 
 export default App
