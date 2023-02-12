@@ -11,6 +11,10 @@ const ForgotPassword = () => {
 		setEmail(e.target.value);
 	}
 
+	const handleSubmit = () => {
+
+	}
+
 	
 	return (
 		<section>
@@ -24,7 +28,7 @@ const ForgotPassword = () => {
 					/>
 				</div>
 				<div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-					<form onSubmit={{}}>
+					<form onSubmit={handleSubmit}>
 						<input
 							type="email"
 							id="email"
