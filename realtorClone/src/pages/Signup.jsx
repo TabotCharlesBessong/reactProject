@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { OAuth } from "../components";
-// import { db } from "../firebase";
+import { db,auth } from "../firebase";
 
 const Signup = () => {
 	const [formData, setFormData] = useState({
@@ -36,7 +36,7 @@ const Signup = () => {
 		}
 
 		try {
-			const auth = getAuth()
+			// const auth = getAuth()
 			const landlordCredentials = await createUserWithEmailAndPassword(auth,formData.email,formData.password)
 			const landlord = tenantCredentials.landlord
 			console.log(landlord)
