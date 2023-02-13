@@ -22,3 +22,7 @@ html::-webkit-scrollbar{
 html{
     scrollbar-width: none;
 }
+
+.edit-form{
+    @apply w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-lg transition ease-in-out
+}

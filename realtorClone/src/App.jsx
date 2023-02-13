@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Header } from "./components";
+import { Header ,PrivateRoutes} from "./components";
 import { ForgotPassword, Home, Offers, Profile, Signin, Signup } from "./pages";
 import {ToastContainer} from 'react-toastify'
 
@@ -14,7 +14,9 @@ function App() {
 					<Route path="signin" element={<Signin />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/offers" element={<Offers />} />
-					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile" element={<PrivateRoutes/>} >
+						<Route path="/profile" element={<Profile />} /> 
+					</Route>
 					<Route path="/forgot" element={<ForgotPassword />} />
 					{/* <Route path="" element={<Home />} />
 					<Route path="" element={<Home />} />
