@@ -52,7 +52,7 @@ const Signup = () => {
 					displayName:formData.name || formData.email.split('@')[0]
 				})
 				const landlord = landlordCredentials.user
-				// console.log(landlord)
+				console.log(landlord)
 				const formDataCopy = {...formData}
 				delete formDataCopy.password
 				delete formDataCopy.cpassword;

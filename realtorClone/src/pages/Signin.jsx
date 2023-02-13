@@ -6,6 +6,7 @@ import { OAuth } from "../components";
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import { auth } from "../firebase";
 import {toast} from 'react-toastify'
+import { useEffect } from "react";
 
 const Signin = () => {
 	const navigate = useNavigate()
@@ -27,6 +28,7 @@ const Signin = () => {
     e.preventDefault()
 		try {
 			const landlordCredentials = await signInWithEmailAndPassword(auth,email,password)
+			console.log(landlordCredentials)
 			if(landlordCredentials.user){
 				navigate('/')
 			}
@@ -34,6 +36,10 @@ const Signin = () => {
 			toast.error('Wrong user credentials')
 		}
 	}
+
+	useEffect(()=>{
+		handleSubmit()
+	},[])
 	return (
 		<section>
 			<h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>

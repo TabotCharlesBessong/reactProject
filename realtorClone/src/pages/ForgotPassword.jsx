@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { toast } from "react-toastify";
 import {OAuth} from "../components";
+import { auth } from "../firebase";
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { toast } from "react-toastify";
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState("");
@@ -11,8 +14,14 @@ const ForgotPassword = () => {
 		setEmail(e.target.value);
 	}
 
-	const handleSubmit = () => {
-
+	const handleSubmit = async (e) => {
+    e.preventDefault()
+		try {
+			await sendPasswordResetEmail(auth,email)
+			toast.success("Reset email sent")
+		} catch (error) {
+			toast.error("Could not send reset email")
+		}
 	}
 
 	
