@@ -1,10 +1,13 @@
-import { getAuth,createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth,createUserWithEmailAndPassword ,updateProfile} from "firebase/auth";
 import React from "react";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { OAuth } from "../components";
 import { db,auth } from "../firebase";
+import {serverTimestamp,setDoc,doc} from 'firebase/firestore'
+import {useNavigate} from 'react-router-dom'
+import { toast } from "react-toastify";
 
 const Signup = () => {
 	const [formData, setFormData] = useState({
@@ -13,9 +16,10 @@ const Signup = () => {
 		password: "",
     cpassword:""
 	});
-	const [error, setError] = useState('')
-	const [match, setMatch] = useState(false)
+	const navigate = useNavigate()
+	const [passwordError, setPasswordError] = useState('')
 	const [showPassword, setShowPassword] = useState(false);
+	const [signupError,setSignupError] = useState('')
 
 	const handleChange = (e) => {
 		setFormData((prev) => ({
@@ -26,23 +30,43 @@ const Signup = () => {
 
 	const handleSubmit = async (e) => {
     e.preventDefault()
-		if(formData.password !== formData.cpassword){
-			setMatch(true)
-			setError('Password must match')
-			return
-		}else{
-			setMatch(false)
-			setError('')
+		
+
+		if(!formData.email) {
+			setSignupError('Please enter your email')
+			toast.error(signupError);
+		}
+		else if (!formData.password || formData.password.length < 6) {
+			setSignupError("Please enter a password of at least 6 characters")
+			toast.error(signupError);
+		}
+		else if (formData.password !== formData.cpassword) {
+				setPasswordError("Password must match");
+				toast.error(passwordError);
+				return;
+			} 
+		else {
+			try {
+				const landlordCredentials = await createUserWithEmailAndPassword(auth,formData.email,formData.password)
+				updateProfile(auth.currentUser,{
+					displayName:formData.name || formData.email.split('@')[0]
+				})
+				const landlord = landlordCredentials.user
+				// console.log(landlord)
+				const formDataCopy = {...formData}
+				delete formDataCopy.password
+				delete formDataCopy.cpassword;
+				formDataCopy.timestamp = serverTimestamp()
+	
+				await setDoc(doc(db,'landlords',landlord.uid),formDataCopy)
+				// toast.success("Signup was successful");
+				navigate('/')
+			} catch (error) {
+				toast.error("Something went wrong with registration")
+			}
+
 		}
 
-		try {
-			// const auth = getAuth()
-			const landlordCredentials = await createUserWithEmailAndPassword(auth,formData.email,formData.password)
-			const landlord = tenantCredentials.landlord
-			console.log(landlord)
-		} catch (error) {
-			console.log(error)
-		}
 	}
 	// console.log(error,match)
 	return (
@@ -114,11 +138,6 @@ const Signup = () => {
 									<AiFillEyeInvisible fontSize={24} />
 								)}
 							</div>
-							{
-								match ? <div className="text-center text-red-600 text-2xl my-2">
-									{error}
-								</div> : ''
-							}
 						</div>
 						<div className="flex justify-between whitespace-nowrap text-sm sm:text-lg">
 							<p className="mb-6">
