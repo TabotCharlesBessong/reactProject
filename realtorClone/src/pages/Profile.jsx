@@ -4,8 +4,9 @@ import {updateProfile } from 'firebase/auth'
 import { auth,db } from '../firebase'
 import {useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
-import {doc,getDoc,setDoc,updateDoc} from 'firebase/firestore'
-// import {} from ''
+import {doc,updateDoc} from 'firebase/firestore'
+import {FcHome} from 'react-icons/fc'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -92,6 +93,14 @@ const Profile = () => {
 							</p>
 						</div>
 					</form>
+
+          <button className='w-full bg-blue-600 text-white uppercase px-7 py-3 text-sm font-medium rounded-md shadow-md hover:bg-blue-800 hover:font-bold transition duration-250 ease-in-out hover:shadow-lg active:bg-blue-900' type="submit">
+            <Link className='flex justify-around items-center' to='/create-listing'>
+              <FcHome className='text-4xl bg-red-300 rounded-full p-2 border-2' />
+              sell or rent your home
+
+            </Link>
+          </button>
 				</div>
 			</section>
 		</>
