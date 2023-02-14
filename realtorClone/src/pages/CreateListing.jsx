@@ -1,7 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import {auth} from '../firebase'
+import { doc } from "firebase/firestore"; 
+import { Spinner } from "../components";
+import { toast } from "react-toastify";
 
 const CreateListing = () => {
+	const [geolocationEnabled, setGeolocationEnabled] = useState(true)
+	const [loading, setLoading] = useState(false)
 	const [formData, setFormData] = useState({
 		type: "rent",
 		name: "",
@@ -10,7 +16,6 @@ const CreateListing = () => {
 		parking: true,
 		furnished: false,
 		address: "",
-		geolocationEnabled: false,
 		description: "",
 		offer: false,
 		regularPrice: 0,
@@ -27,7 +32,6 @@ const CreateListing = () => {
 		parking,
 		furnished,
 		address,
-		geolocationEnabled,
 		latitude,
 		longitude,
 		description,
@@ -37,11 +41,74 @@ const CreateListing = () => {
     images
 	} = formData;
 
-	const handleChange = () => {};
+	// console.log(formData)
+
+	const handleChange = (e) => {
+		let bool = null
+		if(e.target.value === "true"){
+      bool = true
+		}
+		if(e.target.value === "false"){
+			bool = false
+		}
+		if(e.target.files){
+			setFormData((prev) => ({
+				...prev,
+				images:e.target.files
+			}))
+		}
+		if(!e.target.files){
+			setFormData((prev) => ({
+				...prev,
+				[e.target.id]: bool ?? e.target.value
+			}))
+		}
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		setLoading(true)
+		if(discountedPrice >= regularPrice){
+			setLoading(false)
+			toast.error('Regular price must be higher')
+			return
+		}
+		if(images.length > 6){
+			setLoading(false)
+			toast.error('Maximum number of images is 6')
+			return
+		}
+		let geoLocation = {}
+		let location 
+		if(geolocationEnabled){
+			// whenever you are pushing to github, remove the key and put it to the environment variable 
+			// whenever you get back bring it back as well
+			const response = await fetch(
+				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
+					import.meta.env.MAP_API_KEY
+				}`
+			);
+			const data = await response.json()
+			console.log({data},'data')
+			geoLocation.lat = data.results[0]?.geometry.location.lat ?? 0
+			geoLocation.lng = data.results[0]?.geometry.location.lng ?? 0;
+			console.log(geoLocation)
+			location = data.status === 'ZERO_RESULTS' && undefined
+			if(location === undefined || location.includes('undefined')){
+				setLoading(false)
+				toast.error('Please enter a correct address')
+				return
+			}
+
+			setLoading(false)
+		}
+	}
+
+	if(loading) return <Spinner/>
 	return (
 		<main className="max-w-md px-2 mx-auto">
 			<h1 className="text-4xl text-center mt-6 font-bold">Create a listing</h1>
-			<form>
+			<form onSubmit={handleSubmit} >
 				<p className="uppercase text-lg mt-6 font-semibold">sell / rent</p>
 				<div className="flex">
 					<button
@@ -59,13 +126,13 @@ const CreateListing = () => {
 					</button>
 					<button
 						className={`px-7 py-3 font-medium text-sm uppercase shadow-md rounded-sm hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-200 ease-in-out w-full ${
-							type === "sale"
+							type === "sell"
 								? "bg-white text-black"
 								: "bg-slate-600 text-white"
 						} `}
 						id="type"
 						type="button"
-						value="sell"
+						value="rent"
 						onClick={handleChange}
 					>
 						rent

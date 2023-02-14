@@ -18,7 +18,10 @@ function App() {
 						<Route path="/profile" element={<Profile />} /> 
 					</Route>
 					<Route path="/forgot" element={<ForgotPassword />} />
-					<Route path="/create-listing" element={<CreateListing />} />
+					<Route path='/create-listing' element={<PrivateRoutes/>} >
+					  <Route path="/create-listing" element={<CreateListing />} />
+
+					</Route>
 					{/* <Route path="" element={<Home />} />
 					<Route path="" element={<Home />} /> */}
 				</Routes>
