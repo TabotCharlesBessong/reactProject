@@ -6,7 +6,6 @@ import { OAuth } from "../components";
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import { auth } from "../firebase";
 import {toast} from 'react-toastify'
-import { useEffect } from "react";
 
 const Signin = () => {
 	const navigate = useNavigate()
@@ -36,10 +35,6 @@ const Signin = () => {
 			toast.error('Wrong user credentials')
 		}
 	}
-
-	useEffect(()=>{
-		handleSubmit()
-	},[])
 	return (
 		<section>
 			<h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>
@@ -52,7 +47,7 @@ const Signin = () => {
 					/>
 				</div>
 				<div className="w-full md:w-[67%] lg:w-[40%]">
-					<form onClick={handleSubmit} >
+					<form onSubmit={handleSubmit} >
 						<input
 							className="w-full px-4 py-2 text-xl text-gray-700 bg-white mb-5 rounded-lg border-gray-300 transition ease-in-out"
 							type="email"

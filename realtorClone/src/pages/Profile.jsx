@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 // import { User } from 'firebase/auth'
 import { auth } from '../firebase'
+import {useNavigate} from 'react-router-dom'
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,12 @@ const Profile = () => {
   const [edit, setEdit] = useState(false)
   const {name,email} = formData
   console.log(edit)
+  const navigate = useNavigate()
+
+  const logout = () => {
+    auth.signOut()
+    navigate('/')
+  }
   return (
     <>
       <section className='max-w-6xl mx-auto flex justify-center items-center flex-col' >
@@ -24,7 +31,7 @@ const Profile = () => {
               <p className='flex items-center mb-6' >Do you want to change your details? 
               <span className='ml-2 cursor-pointer text-red-500 hover:text-red-800 transition ease-in-out duration-300' onClick={() => setEdit(!edit)} >edit</span>
               </p>
-              <p className='text-blue-600 hover:text-blue-900
+              <p onClick={logout} className='text-blue-600 hover:text-blue-900
                transition ease-in-out duration-300 cursor-pointer' >Sign out</p>
             </div>
           </form>
