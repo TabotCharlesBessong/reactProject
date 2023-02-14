@@ -1,9 +1,14 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import {useAuthStatus} from '../hooks/useAuthStatus'
+import {auth} from '../firebase'
 
 const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
+	const {loading,loggedIn} = useAuthStatus()
+	// const userName = auth.currentUser
+	// console.log(userName)
 	// console.log(location)
 
 	const pathMatch = (route) => {
@@ -41,11 +46,15 @@ const Header = () => {
 							Offers
 						</li>
 						<li
-							className={`py-3 text-sm font-semibold text-gray-400 border-b-[3px] cursor-pointer border-b-transparent ${
-								pathMatch("/signin") && "text-black border-b-red-500"
+							className={`py-3 text-sm font-semibold text-gray-400 border-b-[3px] cursor-pointer border-b-transparent ${(
+								pathMatch("/signin") ||
+								(pathMatch("/profile")) && "text-black border-b-red-500")
 							}`}
 							onClick={() => navigate("/signin")}
 						>
+							{/* {
+							loading ? 'loading...' : loggedIn ? {userName} :'SignIn'
+						} */}
 							Sign In
 						</li>
 					</ul>
