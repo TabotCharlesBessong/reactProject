@@ -2,11 +2,14 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {useAuthStatus} from '../hooks/useAuthStatus'
 import {auth} from '../firebase'
+import { useState,useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const {loading,loggedIn} = useAuthStatus()
+	const [pageState, setPageState] = useState("Sign In");
 	// const userName = auth.currentUser
 	// console.log(userName)
 	// console.log(location)
@@ -16,6 +19,16 @@ const Header = () => {
 			return true;
 		}
 	};
+
+	useEffect(()=>{
+    onAuthStateChanged(auth,(user)=>{
+			if(user){
+				setPageState("Profile")
+			}else{
+				setPageState("Sign In")
+			}
+		})
+	},[auth])
 	return (
 		<div className="bg-white border-b shadow-sm sticky top-0 z-999">
 			<header className="flex justify-between items-center px-3 max-w-6xl mx-auto py-2">
@@ -50,12 +63,9 @@ const Header = () => {
 								pathMatch("/signin") ||
 								(pathMatch("/profile")) && "text-black border-b-red-500")
 							}`}
-							onClick={() => navigate("/signin")}
+							onClick={() => navigate("/profile")}
 						>
-							{/* {
-							loading ? 'loading...' : loggedIn ? {userName} :'SignIn'
-						} */}
-							Sign In
+							{pageState}
 						</li>
 					</ul>
 				</div>
