@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"dot-env": "^0.0.1",
+		"dotenv-webpack": "^8.0.1",
 		"firebase": "^9.17.1",
 		"leaflet": "^1.9.3",
 		"moment": "^2.29.4",

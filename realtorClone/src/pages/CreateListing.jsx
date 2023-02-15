@@ -84,9 +84,7 @@ const CreateListing = () => {
 			// whenever you are pushing to github, remove the key and put it to the environment variable 
 			// whenever you get back bring it back as well
 			const response = await fetch(
-				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
-					import.meta.env.MAP_API_KEY
-				}`
+				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${import.meta.env.VITE_MAP_API_KEY}`
 			);
 			const data = await response.json()
 			console.log({data},'data')
