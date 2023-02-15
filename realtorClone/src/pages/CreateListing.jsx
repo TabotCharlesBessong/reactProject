@@ -1,15 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import { auth, db } from "../firebase";
-import { addDoc, collection, doc, serverTimestamp} from "firebase/firestore";
-import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage'
+import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
+import {
+	getDownloadURL,
+	getStorage,
+	ref,
+	uploadBytesResumable,
+} from "firebase/storage";
 import { Spinner } from "../components";
 import { toast } from "react-toastify";
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
-	const storage = getStorage()
+	const storage = getStorage();
 	const [geolocationEnabled, setGeolocationEnabled] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [formData, setFormData] = useState({
@@ -45,7 +50,7 @@ const CreateListing = () => {
 		images,
 	} = formData;
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	// console.log(formData)
 
 	const handleChange = (e) => {
@@ -69,7 +74,6 @@ const CreateListing = () => {
 			}));
 		}
 	};
-
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -162,19 +166,19 @@ const CreateListing = () => {
 			imgUrls,
 			geoLocation,
 			timestamp: serverTimestamp(),
-			userRef: auth.currentUser.uid
+			userRef: auth.currentUser.uid,
 		};
 		// remove latitude and longitude and address if not used
-		delete formDataCopy.images
-		!formDataCopy.offer && delete formDataCopy.discountedPrice
-		delete formDataCopy.latitude
-		delete formDataCopy.longitude
+		delete formDataCopy.images;
+		!formDataCopy.offer && delete formDataCopy.discountedPrice;
+		delete formDataCopy.latitude;
+		delete formDataCopy.longitude;
 
 		// setLoading(true)
-		const docRef = await addDoc(collection(db,"listings"),formDataCopy)
-		setLoading(false)
-		toast.success("Listing created")
-		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+		const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+		setLoading(false);
+		toast.success("Listing created");
+		navigate(`/category/${formDataCopy.type}/${docRef.id}`);
 	};
 
 	if (loading) return <Spinner />;
