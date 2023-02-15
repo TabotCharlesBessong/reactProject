@@ -1,81 +1,92 @@
-import React from 'react'
-import { useState } from 'react'
-import {updateProfile } from 'firebase/auth'
-import { auth,db } from '../firebase'
-import {useNavigate} from 'react-router-dom'
-import {toast} from 'react-toastify'
-import {collection, doc,getDoc,getDocs,orderBy,query,updateDoc, where} from 'firebase/firestore'
-import {FcHome} from 'react-icons/fc'
-import { Link } from 'react-router-dom'
-import { ListingItem, Listings, Spinner } from '../components'
-import { useEffect } from 'react'
+import React from "react";
+import { useState } from "react";
+import { updateProfile } from "firebase/auth";
+import { auth, db } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+	collection,
+	doc,
+	getDoc,
+	getDocs,
+	orderBy,
+	query,
+	updateDoc,
+	where,
+} from "firebase/firestore";
+import { FcHome } from "react-icons/fc";
+import { Link } from "react-router-dom";
+import { ListingItem, Listings, Spinner } from "../components";
+import { useEffect } from "react";
 
 const Profile = () => {
-  const [formData, setFormData] = useState({
-    name:auth.currentUser.displayName,
-    email:auth.currentUser.email
-  })
-  const [listings, setListings] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [change, setChange] = useState(false)
-  const {name,email} = formData
-  console.log(change)
-  const navigate = useNavigate()
+	const [formData, setFormData] = useState({
+		name: auth.currentUser.displayName,
+		email: auth.currentUser.email,
+	});
+	const [listings, setListings] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [change, setChange] = useState(false);
+	const { name, email } = formData;
+	console.log(change);
+	const navigate = useNavigate();
 
-  const logout = () => {
-    auth.signOut()
-    navigate('/')
-  }
+	const logout = () => {
+		auth.signOut();
+		navigate("/");
+	};
 
-  const handleEdit = async () => {
-   try{
-     if(auth.currentUser.displayName !== name){
-      // update the display name in firebase authentication
-      await updateProfile(auth.currentUser,{
-        displayName:name
-      })
+	const handleEdit = async () => {
+		try {
+			if (auth.currentUser.displayName !== name) {
+				// update the display name in firebase authentication
+				await updateProfile(auth.currentUser, {
+					displayName: name,
+				});
 
-      // update name in firestore
-      const docRef = doc(db,"landlords",auth.currentUser.uid)
-      await updateDoc(docRef,{
-        name
-      })
-      toast.success("Name updated successfully")
-     }
-   }catch{
-    toast.error('Could not update profile details')
-   }
-  }
-  const handleChange = (e) => {
-    setFormData((prev)=> ({
-      ...prev,
-      [e.target.id]:e.target.value
-    }))
-  }
+				// update name in firestore
+				const docRef = doc(db, "landlords", auth.currentUser.uid);
+				await updateDoc(docRef, {
+					name,
+				});
+				toast.success("Name updated successfully");
+			}
+		} catch {
+			toast.error("Could not update profile details");
+		}
+	};
+	const handleChange = (e) => {
+		setFormData((prev) => ({
+			...prev,
+			[e.target.id]: e.target.value,
+		}));
+	};
 
-  useEffect(()=>{
-    const fetchUserListings = async ()=>{
-      const listingRef = collection(db,'listings')
-      const q = query(listingRef,where(
-        'userRef','==', auth.currentUser.uid
-      ),orderBy('timestamp','desc'))
-      const querySnap = await getDocs(q)
-      let listings = []
-      querySnap.forEach((doc)=>{
-        return listings.push({
-          id: doc.id,
-          data:doc.data()
-        })
-      })
-      setListings(listings)
-      setLoading(false)
-    }
+	useEffect(() => {
+		const fetchUserListings = async () => {
+			const listingRef = collection(db, "listings");
+			const q = query(
+				listingRef,
+				where("userRef", "==", auth.currentUser.uid),
+				orderBy("timestamp", "desc")
+			);
+			const querySnap = await getDocs(q);
+			let listings = [];
+			querySnap.forEach((doc) => {
+				return listings.push({
+					id: doc.id,
+					data: doc.data(),
+				});
+			});
+			setListings(listings);
+			setLoading(false);
+		};
 
-    fetchUserListings()
-  },[auth.currentUser.uid])
-  console.log(listings)
+		fetchUserListings();
+	}, [auth.currentUser.uid]);
+	console.log(listings);
 
-  async function onDelete(listingID) {
+	async function onDelete(listingID) {
 		if (window.confirm("Are you sure you want to delete?")) {
 			await deleteDoc(doc(db, "listings", listingID));
 			const updatedListings = listings.filter(
@@ -88,7 +99,7 @@ const Profile = () => {
 	function onEdit(listingID) {
 		navigate(`/edit-listing/${listingID}`);
 	}
-  return (
+	return (
 		<>
 			<section className="max-w-6xl mx-auto flex justify-center items-center flex-col">
 				<h1 className="text-3xl text-center mt-6 font-bold">My Profile</h1>
@@ -172,6 +183,6 @@ const Profile = () => {
 			</div>
 		</>
 	);
-}
+};
 
-export default Profile
+export default Profile;
