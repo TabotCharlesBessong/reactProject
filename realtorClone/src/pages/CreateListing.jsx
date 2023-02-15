@@ -1,13 +1,17 @@
 import React from "react";
 import { useState } from "react";
-import {auth} from '../firebase'
-import { doc } from "firebase/firestore"; 
+import { auth, db } from "../firebase";
+import { addDoc, collection, doc, serverTimestamp} from "firebase/firestore";
+import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage'
 import { Spinner } from "../components";
 import { toast } from "react-toastify";
+import {v4 as uuidv4} from 'uuid'
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
-	const [geolocationEnabled, setGeolocationEnabled] = useState(true)
-	const [loading, setLoading] = useState(false)
+	const storage = getStorage()
+	const [geolocationEnabled, setGeolocationEnabled] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [formData, setFormData] = useState({
 		type: "rent",
 		name: "",
@@ -36,77 +40,148 @@ const CreateListing = () => {
 		longitude,
 		description,
 		regularPrice,
-    offer,
-    discountedPrice,
-    images
+		offer,
+		discountedPrice,
+		images,
 	} = formData;
 
+	const navigate = useNavigate()
 	// console.log(formData)
 
 	const handleChange = (e) => {
-		let bool = null
-		if(e.target.value === "true"){
-      bool = true
+		let bool = null;
+		if (e.target.value === "true") {
+			bool = true;
 		}
-		if(e.target.value === "false"){
-			bool = false
+		if (e.target.value === "false") {
+			bool = false;
 		}
-		if(e.target.files){
+		if (e.target.files) {
 			setFormData((prev) => ({
 				...prev,
-				images:e.target.files
-			}))
+				images: e.target.files,
+			}));
 		}
-		if(!e.target.files){
+		if (!e.target.files) {
 			setFormData((prev) => ({
 				...prev,
-				[e.target.id]: bool ?? e.target.value
-			}))
+				[e.target.id]: bool ?? e.target.value,
+			}));
 		}
 	};
 
+
 	const handleSubmit = async (e) => {
-		e.preventDefault()
-		setLoading(true)
-		if(discountedPrice >= regularPrice){
-			setLoading(false)
-			toast.error('Regular price must be higher')
-			return
+		e.preventDefault();
+		setLoading(true);
+		// converting strings to number if they are not numbers
+		if (+discountedPrice >= +regularPrice) {
+			setLoading(false);
+			toast.error("Regular price must be higher");
+			return;
 		}
-		if(images.length > 6){
-			setLoading(false)
-			toast.error('Maximum number of images is 6')
-			return
+		if (images.length > 6) {
+			setLoading(false);
+			toast.error("Maximum number of images is 6");
+			return;
 		}
-		let geoLocation = {}
-		let location 
-		if(geolocationEnabled){
-			// whenever you are pushing to github, remove the key and put it to the environment variable 
+		let geoLocation = {};
+		let location;
+		if (geolocationEnabled) {
+			// whenever you are pushing to github, remove the key and put it to the environment variable
 			// whenever you get back bring it back as well
 			const response = await fetch(
-				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${import.meta.env.VITE_MAP_API_KEY}`
+				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
+					import.meta.env.VITE_MAP_API_KEY
+				}`
 			);
-			const data = await response.json()
-			console.log({data},'data')
-			geoLocation.lat = data.results[0]?.geometry.location.lat ?? 0
+			const data = await response.json();
+			console.log({ data }, "data");
+			geoLocation.lat = data.results[0]?.geometry.location.lat ?? 0;
 			geoLocation.lng = data.results[0]?.geometry.location.lng ?? 0;
-			console.log(geoLocation)
-			location = data.status === 'ZERO_RESULTS' && undefined
-			if(location === undefined || location.includes('undefined')){
-				setLoading(false)
-				toast.error('Please enter a correct address')
-				return
+			console.log(geoLocation);
+			location = data.status === "ZERO_RESULTS" && undefined;
+			if (location === undefined) {
+				setLoading(false);
+				toast.error("Please enter a correct address");
+				return;
 			}
 
-			setLoading(false)
+			setLoading(false);
+		} else {
+			geoLocation.lat = latitude;
+			geoLocation.lng = longitude;
 		}
-	}
 
-	if(loading) return <Spinner/>
+		const storeImage = async (image) => {
+			return new Promise((resolve, reject) => {
+				const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
+				const storageRef = ref(storage, fileName);
+				const uploadTask = uploadBytesResumable(storageRef, image);
+				uploadTask.on(
+					"state_changed",
+					(snapshot) => {
+						// Observe state change events such as progress, pause, and resume
+						// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+						const progress =
+							(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+						console.log("Upload is " + progress + "% done");
+						switch (snapshot.state) {
+							case "paused":
+								console.log("Upload is paused");
+								break;
+							case "running":
+								console.log("Upload is running");
+								break;
+						}
+					},
+					(error) => {
+						// Handle unsuccessful uploads
+						reject(error);
+					},
+					() => {
+						// Handle successful uploads on complete
+						// For instance, get the download URL: https://firebasestorage.googleapis.com/...
+						getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+							resolve(downloadURL);
+						});
+					}
+				);
+			});
+		};
+		const imgUrls = await Promise.all(
+			[...images].map((image) => storeImage(image))
+		).catch((error) => {
+			setLoading(false);
+			toast.error("Images not uploaded");
+			return;
+		});
+		// console.log(imageUrls)
+		const formDataCopy = {
+			...formData,
+			imgUrls,
+			geoLocation,
+			timestamp: serverTimestamp(),
+			userRef: auth.currentUser.uid
+		};
+		// remove latitude and longitude and address if not used
+		delete formDataCopy.images
+		!formDataCopy.offer && delete formDataCopy.discountedPrice
+		delete formDataCopy.latitude
+		delete formDataCopy.longitude
+
+		// setLoading(true)
+		const docRef = await addDoc(collection(db,"listings"),formDataCopy)
+		setLoading(false)
+		toast.success("Listing created")
+		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+	};
+
+	if (loading) return <Spinner />;
 	return (
 		<main className="max-w-md px-2 mx-auto">
 			<h1 className="text-4xl text-center mt-6 font-bold">Create a listing</h1>
-			<form onSubmit={handleSubmit} >
+			<form onSubmit={handleSubmit}>
 				<p className="uppercase text-lg mt-6 font-semibold">sell / rent</p>
 				<div className="flex">
 					<button
