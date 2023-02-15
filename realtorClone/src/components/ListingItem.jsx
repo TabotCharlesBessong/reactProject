@@ -1,4 +1,4 @@
-// import Moment from "react-moment";
+import moment from "moment";
 import { Link } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
@@ -12,12 +12,9 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
 					loading="lazy"
 					src={listing.imgUrls[0]}
 				/>
-				{/* <Moment
-					className="absolute top-2 left-2 bg-[#3377cc] text-white uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg"
-					fromNow
-				>
-					{listing.timestamp?.toDate()}
-				</Moment> */}
+				<h2 className="absolute top-2 left-2 bg-[#3377cc] text-white uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg">
+					{moment(new Date(listing.timestamp?.seconds * 1000)).fromNow()}
+				</h2>
 				<div className="w-full p-[10px]">
 					<div className="flex items-center space-x-1">
 						<MdLocationOn className="h-4 w-4 text-green-600" />
