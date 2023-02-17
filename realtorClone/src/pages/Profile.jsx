@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
 	collection,
+	deleteDoc,
 	doc,
 	getDoc,
 	getDocs,
