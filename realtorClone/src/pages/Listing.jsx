@@ -24,7 +24,8 @@ const Listing = () => {
 			if (docSnap.exists()) {
 				setListing(docSnap.data());
 				setLoading(false);
-				console.log(listing);
+				console.log(listing,'listings');
+        console.log(docSnap,'docSnap')
 			}
 		};
 		fetchListing();
@@ -46,15 +47,19 @@ const Listing = () => {
 				{listing.imgUrls.map((url, index) => (
 					<SwiperSlide key={index}>
 						<div
-							style={{
-								background: `url(${listing.imgUrls[index]}) center no-repeat`,
-								backgroundSize: "cover",
-							}}
 							className="relative w-full overflow-hidden h-[300px]"
+							style={{
+								background: `url(${listing.imgUrls[index]})`,
+								backgroundSize: "cover",
+								backgroundPosition: "center",
+								backgroundRepeat: "no-repeat",
+							}}
 						></div>
 					</SwiperSlide>
 				))}
 			</Swiper>
+
+      
 		</main>
 	);
 };
