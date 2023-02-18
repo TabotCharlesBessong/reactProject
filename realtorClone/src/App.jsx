@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header ,PrivateRoutes} from "./components";
-import { CreateListing, EditListing, ForgotPassword, Home, Offers, Profile, Signin, Signup } from "./pages";
+import { CreateListing, EditListing, ForgotPassword, Home, Listing, Offers, Profile, Signin, Signup } from "./pages";
 import {ToastContainer} from 'react-toastify'
 
 function App() {
@@ -25,8 +25,8 @@ function App() {
 					<Route path="/edit-listing" element={<PrivateRoutes />}>
 						<Route path="/edit-listing/:listingId" element={<EditListing />} />
 					</Route>
-					{/* <Route path="" element={<Home />} />
-					<Route path="" element={<Home />} /> */}
+					<Route path="/category/:categoryName/:listingId" element={<Listing />} />
+					{/* <Route path="" element={<Home />} /> */}
 				</Routes>
 			</Router>
 			<ToastContainer
