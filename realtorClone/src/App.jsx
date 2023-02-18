@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header ,PrivateRoutes} from "./components";
-import { CreateListing, ForgotPassword, Home, Offers, Profile, Signin, Signup } from "./pages";
+import { CreateListing, EditListing, ForgotPassword, Home, Offers, Profile, Signin, Signup } from "./pages";
 import {ToastContainer} from 'react-toastify'
 
 function App() {
@@ -14,20 +14,23 @@ function App() {
 					<Route path="signin" element={<Signin />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/offers" element={<Offers />} />
-					<Route path="/profile" element={<PrivateRoutes/>} >
-						<Route path="/profile" element={<Profile />} /> 
+					<Route path="/profile" element={<PrivateRoutes />}>
+						<Route path="/profile" element={<Profile />} />
 					</Route>
 					<Route path="/forgot" element={<ForgotPassword />} />
-					<Route path='/create-listing' element={<PrivateRoutes/>} >
-					  <Route path="/create-listing" element={<CreateListing />} />
+					<Route path="/create-listing" element={<PrivateRoutes />}>
+						<Route path="/create-listing" element={<CreateListing />} />
+					</Route>
 
+					<Route path="/edit-listing" element={<PrivateRoutes />}>
+						<Route path="/edit-listing/:listingId" element={<EditListing />} />
 					</Route>
 					{/* <Route path="" element={<Home />} />
 					<Route path="" element={<Home />} /> */}
 				</Routes>
 			</Router>
-			<ToastContainer 
-				position='bottom-center'
+			<ToastContainer
+				position="bottom-center"
 				autoClose={5000}
 				hideProgress={false}
 				newestOnTop={false}
@@ -36,7 +39,7 @@ function App() {
 				pauseOnFocus
 				draggable
 				pauseOnHover
-				theme='dark'
+				theme="dark"
 			/>
 		</>
 	);
