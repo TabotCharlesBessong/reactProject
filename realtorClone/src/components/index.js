@@ -5,3 +5,4 @@ export { default as Spinner } from "./Spinner";
 export { default as Listings } from "./Listings";
 export { default as ListingItem } from "./ListingItem";
 export {default as Contact} from './Contact'
+export {default as Slider} from './Slider'
