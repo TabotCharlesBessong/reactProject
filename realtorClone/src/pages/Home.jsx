@@ -2,7 +2,8 @@ import { collection, getDocs, limit, orderBy, query, where } from "firebase/fire
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Slider } from "../components";
+import { Link } from "react-router-dom";
+import { ListingItem, Slider } from "../components";
 import { db } from "../firebase";
 
 const Home = () => {
@@ -38,7 +39,7 @@ const Home = () => {
 	}, [rentListings,setRentListings]);
 
   useEffect(() => {
-		async function fetchListings() {
+		const fetchListings = async ()=> {
 			try {
 				// get reference
 				const listingsRef = collection(db, "listings");
@@ -67,7 +68,7 @@ const Home = () => {
 	}, []);
 
   useEffect(() => {
-		async function fetchListings() {
+		const fetchListings = async () => {
 			try {
 				// get reference
 				const listingsRef = collection(db, "listings");
