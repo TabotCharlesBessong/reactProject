@@ -4,13 +4,13 @@ import 'firebase/auth'
 // import { seedDatabase } from '../seed';
 
 const config = {
-	apiKey: "AIzaSyDgl-5QUcBC9Tcu74nVys1b69jfAbzhdYw",
-  authDomain: "twitter-react-3371b.firebaseapp.com",
-  projectId: "twitter-react-3371b",
-  storageBucket: "twitter-react-3371b.appspot.com",
-  messagingSenderId: "532715213869",
-  appId: "1:532715213869:web:b442cf30aef1f09619d4a4",
-  measurementId: "G-RH1Q7BJ0QD"
+	apiKey: import.meta.env.VITE_API_KEY,
+	authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_APP_ID,
+	measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 const firebase = Firebase.initializeApp(config)
