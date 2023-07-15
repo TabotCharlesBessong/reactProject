@@ -16,7 +16,7 @@ const Login = () => {
       let res = await LoginAPI(credentails.email, credentails.password);
       toast.success("Signed In to Linkedin!");
       localStorage.setItem("userEmail", res.user.email);
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       console.log(err);
       toast.error("Please Check your Credentials");
