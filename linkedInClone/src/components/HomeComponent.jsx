@@ -1,9 +1,12 @@
 
 import React from 'react'
+import {PostUpdate} from '../components'
 
 const HomeComponent = () => {
   return (
-    <h1>HomeComponent</h1>
+    <>
+      <PostUpdate/>
+    </>
   )
 }
 
