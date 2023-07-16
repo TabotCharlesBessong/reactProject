@@ -1,11 +1,12 @@
 
 import React from "react";
-import { LoginAPI } from "../api/AuthAPI";
+import { LoginAPI,GoogleSignInAPI } from "../api/AuthAPI";
 import '../Sass/LoginComponent.scss'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LinkedinLogo from '../assets/images/linkedinLogo.png'
 import { toast } from "react-toastify";
+import GoogleButton from "react-google-button";
 
 const Login = () => {
   const [credentails, setCredentials] = useState({});
@@ -15,12 +16,17 @@ const Login = () => {
       let res = await LoginAPI(credentails.email, credentails.password);
       toast.success("Signed In to Linkedin!");
       localStorage.setItem("userEmail", res.user.email);
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       console.log(err);
       toast.error("Please Check your Credentials");
     }
   };
+
+  const googleSignIn = () => {
+    const response = GoogleSignInAPI()
+    console.log(response)
+  }
   return (
     <div className="login-wrapper">
       <img src={LinkedinLogo} className="linkedinLogo" />
@@ -53,6 +59,7 @@ const Login = () => {
       </div>
       <hr className="hr-text" data-content="or" />
       <div className="google-btn-container">
+        <GoogleButton className="google-btn" onClick={() => googleSignIn()} />
         <p className="go-to-signup">
           New to LinkedIn?{" "}
           <span className="join-now" onClick={() => navigate("/register")}>
@@ -60,6 +67,7 @@ const Login = () => {
           </span>
         </p>
       </div>
+
     </div>
   );
 };
