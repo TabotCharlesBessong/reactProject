@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
-// import { postStatus, getStatus, updatePost } from "../../../api/FirestoreAPI";
-// import { getCurrentTimeStamp } from "../../../helpers/useMoment";
+import { postStatus } from "../../../api/firestoreAPI";
+import { getCurrentTimeStamp } from "../../../helpers/useMoment";
 import {ModalComponent} from '../../../components'
 // import { uploadPostImage } from "../../../api/ImageUpload";
 // import { getUniqueID } from "../../../helpers/getUniqueId";
@@ -16,21 +16,21 @@ export default function PostStatus({ currentUser }) {
   const [isEdit, setIsEdit] = useState(false);
   const [postImage, setPostImage] = useState("");
 
-  // const sendStatus = async () => {
-  //   let object = {
-  //     status: status,
-  //     timeStamp: getCurrentTimeStamp("LLL"),
-  //     userEmail: currentUser.email,
-  //     userName: currentUser.name,
-  //     postID: getUniqueID(),
-  //     userID: currentUser.id,
-  //     postImage: postImage,
-  //   };
-  //   await postStatus(object);
-  //   await setModalOpen(false);
-  //   setIsEdit(false);
-  //   await setStatus("");
-  // };
+  const sendStatus = async () => {
+    let object = {
+      status: status,
+      timeStamp: getCurrentTimeStamp("LLL"),
+      userEmail: currentUser.email,
+      userName: currentUser.name,
+      postID: getUniqueID(),
+      userID: currentUser.id,
+      postImage: postImage,
+    };
+    await postStatus(object);
+    await setModalOpen(false);
+    setIsEdit(false);
+    await setStatus("");
+  };
 
   // const getEditData = (posts) => {
   //   setModalOpen(true);
@@ -77,7 +77,7 @@ export default function PostStatus({ currentUser }) {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         status={status}
-        // sendStatus={sendStatus}
+        sendStatus={sendStatus}
         isEdit={isEdit}
         // updateStatus={updateStatus}
         // uploadPostImage={uploadPostImage}

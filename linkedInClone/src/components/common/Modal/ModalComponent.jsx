@@ -73,7 +73,7 @@ const ModalComponent = ({
             <></>
           )}
         </div>
-        <label for="pic-upload">
+        <label htmlFor="pic-upload">
           <AiOutlinePicture size={35} className="picture-icon" />
         </label>
         <input
