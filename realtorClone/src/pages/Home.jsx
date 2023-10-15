@@ -75,7 +75,7 @@ const Home = () => {
 				// create the query
 				const q = query(
 					listingsRef,
-					where("type", "==", "sale"),
+					where("type", "==", "sell"),
 					orderBy("timestamp", "desc"),
 					limit(4)
 				);
@@ -95,6 +95,7 @@ const Home = () => {
 		}
 		fetchListings();
 	}, []);
+	console.log(offerListings)
 	return (
 		<div>
 			<Slider />
