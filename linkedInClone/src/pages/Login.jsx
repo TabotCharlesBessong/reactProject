@@ -1,30 +1,21 @@
-
-import React from "react";
-import { Loader, LoginComponent } from "../components";
-import { useEffect } from "react";
-import { auth } from "../firebaseConfig";
+import React, { useEffect, useState } from "react";
+import LoginComponent from "../components/LoginComponent";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { auth } from "../firebaseConfig";
+import Loader from "../components/common/Loader";
 
-
-const Login = () => {
-  const [laoding, setLaoding] = useState(true)
-  const navigate = useNavigate()
+export default function Login() {
+  const [loading, setLoading] = useState(true);
+  let navigate = useNavigate();
   useEffect(() => {
-    onAuthStateChanged(auth,(res) => {
-      if(res?.accessToken){
-        navigate('/home')
-      }else{
-        setLaoding(false)
+    onAuthStateChanged(auth, (res) => {
+      if (res?.accessToken) {
+        navigate("/home");
+      } else {
+        setLoading(false);
       }
-    })
-  },[])
-  return <div>
-    {
-      laoding ? <Loader/> : <LoginComponent/>
-    }
-  </div>;
-};
-
-export default Login;
+    });
+  }, []);
+  return loading ? <Loader /> : <LoginComponent />;
+}
