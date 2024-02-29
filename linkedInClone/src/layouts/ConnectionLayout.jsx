@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
-import Home from "../Pages/Home";
+import Connections from "../Pages/Connections";
 import { getCurrentUser } from "../api/FirestoreAPI";
 import Topbar from "../components/common/Topbar";
 
-export default function HomeLayout() {
+export default function ConnectionLayout() {
   const [currentUser, setCurrentUser] = useState({});
 
   useMemo(() => {
@@ -12,7 +12,7 @@ export default function HomeLayout() {
   return (
     <div>
       <Topbar currentUser={currentUser} />
-      <Home currentUser={currentUser} />
+      <Connections currentUser={currentUser} />
     </div>
   );
 }

@@ -10,8 +10,6 @@ body {
 .login-wrapper {
   background-color: white !important;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
   .login-wrapper-inner {
     display: flex;
     flex-direction: column;
@@ -58,7 +56,6 @@ body {
 
 .linkedinLogo {
   width: 80px;
-  margin:2rem auto 0;
 }
 
 .hr-text {

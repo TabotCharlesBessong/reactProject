@@ -1,23 +1,29 @@
 import { createBrowserRouter } from "react-router-dom";
-import {Home, Login, Register} from "../pages";
-import App from '../App'
-import HomeLayout from './../layouts/HomeLayout';
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+import HomeLayout from "../layouts/HomeLayout";
+import ProfileLayout from "../layouts/ProfileLayout";
+import ConnectionLayout from "../layouts/ConnectionLayout";
 
 export const router = createBrowserRouter([
   {
-    path:'/login',
-    element: <Login/> 
+    path: "/",
+    element: <Login />,
   },
   {
-    path:'/',
-    element:<App/>
+    path: "/register",
+    element: <Register />,
   },
   {
-    path:'/register',
-    element:<Register/>
+    path: "/home",
+    element: <HomeLayout />,
   },
   {
-    path:'/home',
-    element:<HomeLayout/>
+    path: "/profile",
+    element: <ProfileLayout />,
   },
-])
+  {
+    path: "/connections",
+    element: <ConnectionLayout />,
+  },
+]);
