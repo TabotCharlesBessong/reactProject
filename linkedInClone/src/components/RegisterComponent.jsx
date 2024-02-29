@@ -66,7 +66,7 @@ export default function RegisterComponent() {
           Agree & Join
         </button>
       </div>
-      <hr class="hr-text" data-content="or" />
+      <hr className="hr-text" data-content="or" />
       <div className="google-btn-container">
         <p className="go-to-signup">
           Already on LinkedIn?{" "}

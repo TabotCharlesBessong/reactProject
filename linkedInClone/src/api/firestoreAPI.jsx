@@ -15,5 +15,6 @@ export const postStatus = (object) => {
     })
     .catch((err) => {
       console.log(err);
+      toast.error("Failed to post")
     });
 };

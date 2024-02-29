@@ -49,13 +49,13 @@ const ModalComponent = ({
         ]}
       >
         <div className="posts-body">
-          <ReactQuill
+          {/* <ReactQuill
             className="modal-input"
             theme="snow"
             value={status}
             placeholder="Share Something Useful.."
             onChange={setStatus}
-          />
+          /> */}
           {progress === 0 || progress === 100 ? (
             <></>
           ) : (
@@ -73,6 +73,7 @@ const ModalComponent = ({
             <></>
           )}
         </div>
+        <input type="text" placeholder="Post something" className="modal-input" value={status} onChange={(e) => setStatus(e.target.value)} />
         <label htmlFor="pic-upload">
           <AiOutlinePicture size={35} className="picture-icon" />
         </label>
