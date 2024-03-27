@@ -1,15 +1,13 @@
 import React from "react";
-import { PageLayout, Signup } from "./component";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Routes } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { AuthForm, PageLayout } from "./component";
 
 const App = () => {
   return (
     <Router>
       <PageLayout>
         <Routes>
-          <Route path="/" element={<Signup />} />
+          <Route path="/" element={<AuthForm />} />
         </Routes>
       </PageLayout>
     </Router>
