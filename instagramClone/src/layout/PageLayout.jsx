@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Flex, Box } from "@chakra-ui/react";
-import { PageLayoutSpinner } from "../component";
+import { PageLayoutSpinner, Sidebar } from "../component";
 
 const PageLayout = ({ children }) => {
   const { pathname } = useLocation();
@@ -15,8 +15,8 @@ const PageLayout = ({ children }) => {
   if (checkingUserIsAuth) return <PageLayoutSpinner /> ;
   return (
     <Flex>
-      {/* {canRenderSidebar ? <Box>sidebar</Box> : null}
-      {canRenderNavbar && "Navbar" } */}
+      {canRenderSidebar ? <Box><Sidebar /></Box> : null}
+      {/* {canRenderNavbar && "Navbar" } */}
       <Box
         flex={1}
         w={{ base: "calc(100% - 70px)", md: "calc(100% -240px)" }}
