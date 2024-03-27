@@ -15,8 +15,8 @@ const PageLayout = ({ children }) => {
   if (checkingUserIsAuth) return <PageLayoutSpinner /> ;
   return (
     <Flex>
-      {canRenderSidebar ? <Box>sidebar</Box> : null}
-      {canRenderNavbar && "Navbar" }
+      {/* {canRenderSidebar ? <Box>sidebar</Box> : null}
+      {canRenderNavbar && "Navbar" } */}
       <Box
         flex={1}
         w={{ base: "calc(100% - 70px)", md: "calc(100% -240px)" }}

@@ -1,8 +1,7 @@
+import { Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Box, VStack, Image, Flex, Text } from "@chakra-ui/react";
+import { GoogleAuth, Login, Signup } from "..";
 import images from "../../constants/images";
-import Login from "./Login";
-import Signup from "./Signup";
 
 const AuthForm = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -20,6 +19,7 @@ const AuthForm = () => {
             </Text>
             <Box flex={2} h={"2px"} bg={"gray.400"} />
           </Flex>
+          <GoogleAuth />
         </VStack>
       </Box>
 
