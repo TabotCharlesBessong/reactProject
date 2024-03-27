@@ -19,7 +19,7 @@ const AuthForm = () => {
             </Text>
             <Box flex={2} h={"2px"} bg={"gray.400"} />
           </Flex>
-          <GoogleAuth />
+          <GoogleAuth prefix="Login with" />
         </VStack>
       </Box>
 
