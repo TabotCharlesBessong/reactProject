@@ -5,6 +5,8 @@ export { default as Login } from "./auth/Login";
 export { default as Signup } from "./auth/Signup";
 export { default as PageLayoutSpinner } from "./common/PageLayoutSpinner";
 export { default as ProfileSkeleton } from "./common/ProfileSkeleton";
+export { default as EditProfile } from "./profile/EditProfile";
+export { default as ProfileHeader } from "./profile/ProfileHeader";
 export { default as CreatePost } from "./sidebar/CreatePost";
 export { default as HomeSide } from "./sidebar/Home";
 export { default as Notifications } from "./sidebar/Notifications";
