@@ -7,6 +7,7 @@ export { default as PageLayoutSpinner } from "./common/PageLayoutSpinner";
 export { default as ProfileSkeleton } from "./common/ProfileSkeleton";
 export { default as EditProfile } from "./profile/EditProfile";
 export { default as ProfileHeader } from "./profile/ProfileHeader";
+export { default as PrpfileTabs } from "./profile/ProfileTabs";
 export { default as CreatePost } from "./sidebar/CreatePost";
 export { default as HomeSide } from "./sidebar/Home";
 export { default as Notifications } from "./sidebar/Notifications";
@@ -14,3 +15,4 @@ export { default as ProfileLink } from "./sidebar/ProfileLink";
 export { default as Search } from "./sidebar/Search";
 export { default as Sidebar } from "./sidebar/Sidebar";
 export { default as SidebarItems } from "./sidebar/SidebarItems";
+

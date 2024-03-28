@@ -1,7 +1,8 @@
 import React from "react";
 // import { useParams } from 'react-router-dom'
 import { Container, Flex } from "@chakra-ui/react";
-import { ProfileHeader, ProfileSkeleton } from "../component";
+import { ProfileHeader } from "../component";
+import ProfileTabs from "../component/profile/ProfileTabs";
 
 const ProfilePage = () => {
   // const {username} = useParams()
@@ -11,7 +12,7 @@ const ProfilePage = () => {
       {/* <ProfileSkeleton /> */}
     </Flex>
     <Flex>
-      Profile Tabs
+      <ProfileTabs />
       Profile Post
     </Flex>
   </Container>);
