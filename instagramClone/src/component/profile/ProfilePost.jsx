@@ -20,6 +20,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import images from '../../constants/images';
+import {Caption, Comment,} from "../index"
 
 const ProfilePost = ({post}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -142,19 +143,22 @@ const ProfilePost = ({post}) => {
                 </Flex>
                 <Divider my={4} bg={"gray.500"} />
 
-                {/* <VStack
+                <VStack
                   w="full"
                   alignItems={"start"}
                   maxH={"350px"}
                   overflowY={"auto"}
-                > */}
+                >
                   {/* CAPTION */}
+                  <Caption />
                   {/* {post.caption && <Caption post={post} />} */}
                   {/* COMMENTS */}
                   {/* {post.comments.map((comment) => (
                     <Comment key={comment.id} comment={comment} />
-                  ))}
-                </VStack> */}
+                  ))} */}
+                  <Comment />
+                </VStack>
+                
                 <Divider my={4} bg={"gray.8000"} />
 
                 {/* <PostFooter isProfilePage={true} post={post} /> */}
