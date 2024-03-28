@@ -6,6 +6,8 @@ export { default as Signup } from "./auth/Signup";
 export { default as Navbar } from "./common/Navbar";
 export { default as PageLayoutSpinner } from "./common/PageLayoutSpinner";
 export { default as ProfileSkeleton } from "./common/ProfileSkeleton";
+export { default as Caption } from "./common/comment/Caption";
+export { default as Comment } from "./common/comment/Comment";
 export { default as EditProfile } from "./profile/EditProfile";
 export { default as NoPostsFound } from "./profile/NoPostsFound";
 export { default as ProfileHeader } from "./profile/ProfileHeader";
