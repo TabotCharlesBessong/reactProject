@@ -19,6 +19,7 @@ import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import images from '../../constants/images';
 
 const ProfilePost = ({post}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -115,16 +116,17 @@ const ProfilePost = ({post}) => {
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
                   <Flex alignItems={"center"} gap={4}>
                     <Avatar
-                      src={userProfile.profilePicURL}
+                      src={images.charles}
                       size={"sm"}
                       name="As a Programmer"
                     />
                     <Text fontWeight={"bold"} fontSize={12}>
-                      {userProfile.username}
+                      {/* {userProfile.username} */}
+                      CharlesTabot
                     </Text>
                   </Flex>
 
-                  {authUser?.uid === userProfile.uid && (
+                  {/* {authUser?.uid === userProfile.uid && ( */}
                     <Button
                       size={"sm"}
                       bg={"transparent"}
@@ -136,26 +138,26 @@ const ProfilePost = ({post}) => {
                     >
                       <MdDelete size={20} cursor="pointer" />
                     </Button>
-                  )}
+                  {/* )} */}
                 </Flex>
                 <Divider my={4} bg={"gray.500"} />
 
-                <VStack
+                {/* <VStack
                   w="full"
                   alignItems={"start"}
                   maxH={"350px"}
                   overflowY={"auto"}
-                >
+                > */}
                   {/* CAPTION */}
-                  {post.caption && <Caption post={post} />}
+                  {/* {post.caption && <Caption post={post} />} */}
                   {/* COMMENTS */}
-                  {post.comments.map((comment) => (
+                  {/* {post.comments.map((comment) => (
                     <Comment key={comment.id} comment={comment} />
                   ))}
-                </VStack>
+                </VStack> */}
                 <Divider my={4} bg={"gray.8000"} />
 
-                <PostFooter isProfilePage={true} post={post} />
+                {/* <PostFooter isProfilePage={true} post={post} /> */}
               </Flex>
             </Flex>
           </ModalBody>
