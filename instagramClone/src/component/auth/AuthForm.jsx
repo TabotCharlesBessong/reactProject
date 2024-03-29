@@ -10,7 +10,11 @@ const AuthForm = () => {
       <Box border={"1px solid gray"} borderRadius={4} padding={5}>
         <VStack spacing={4}>
           <Image src={images.logo} h={24} cursor={"pointer"} alt="Intagram" />
-          {isLoggedIn ? <Login /> : <Signup />}
+          {isLoggedIn ? (
+            <Login />
+          ) : (
+            <Signup isLogged={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          )}
 
           <Flex>
             <Box flex={2} h={"2px"} bg={"gray.400"} />
