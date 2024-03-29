@@ -22,7 +22,7 @@ const Login = () => {
   const {login,loading,error} = useLogin()
   const handleLogin = (form) => {
     login(form)
-    navigate("/")
+    // navigate("/")
   }
   return (
     <>

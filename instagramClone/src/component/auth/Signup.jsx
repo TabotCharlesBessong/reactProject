@@ -22,7 +22,7 @@ const Signup = ({isLogged,setIsLoggedIn}) => {
   const { loading, error, signup } = useSignupWithEmailAndPassword();
   const handleSignup = (form) => {
     signup(form)
-    setIsLoggedIn(true)
+    // setIsLoggedIn(true)
   }
   return (
     <>
