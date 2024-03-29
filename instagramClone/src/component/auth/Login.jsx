@@ -9,15 +9,21 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import useLogin from "../../hooks/auth/useLogin";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate()
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const error = false;
-  const loading = false;
+  const {login,loading,error} = useLogin()
+  const handleLogin = (form) => {
+    login(form)
+    // navigate("/")
+  }
   return (
     <>
       <Input
@@ -49,6 +55,7 @@ const Login = () => {
       {error && (
         <Alert status="error" fontSize={13} p={2} borderRadius={4}>
           <AlertIcon fontSize={12} />
+          {error.message}
         </Alert>
       )}
       <Button
@@ -56,7 +63,7 @@ const Login = () => {
         colorScheme="blue"
         size={"sm"}
         isLoading={loading}
-        onClick={() => {}}
+        onClick={() => handleLogin(inputs)}
       >
         Login
       </Button>
