@@ -15,17 +15,33 @@ import {
   ModalOverlay,
   Stack,
 } from "@chakra-ui/react";
-import React, { useRef, useState } from 'react';
-import images from '../../constants/images';
+import React, { useRef, useState } from "react";
+import images from "../../constants/images";
+import useAuthStore from "../../store/authStore";
+import usePreviewImg from "../../hooks/utility/usePreviewImg";
+import useEditProfile from "../../hooks/user/useEditProfile";
+import useShowToast from "../../hooks/utility/useShowToast";
 
-const EditProfile = ({isOpen,onClose}) => {
+const EditProfile = ({ isOpen, onClose }) => {
   const [inputs, setInputs] = useState({
-    fullName:"",
-    username:"",
-    bio:""
-  })
-  const handleEditProfile = async () => {}
-  const fileRef = useRef()
+    fullName: "",
+    username: "",
+    bio: "",
+  });
+  const authUser = useAuthStore((state) => state.user);
+  const { handleImageChange, selectedFile, setSelectedFile } = usePreviewImg();
+  const { isUpdating, editProfile } = useEditProfile();
+  const fileRef = useRef();
+  const showToast = useShowToast();
+  const handleEditProfile = async () => {
+    try {
+      await editProfile(inputs, selectedFile);
+      setSelectedFile(null);
+      onClose();
+    } catch (error) {
+      showToast("Error", error.message, "error");
+    }
+  };
   return (
     <div>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -57,7 +73,11 @@ const EditProfile = ({isOpen,onClose}) => {
                     <Center>
                       <Avatar
                         size="xl"
-                        src={images.charles}
+                        src={
+                          selectedFile ||
+                          authUser.profilePicURL ||
+                          images.charles
+                        }
                         border={"2px solid white "}
                       />
                     </Center>
@@ -70,7 +90,7 @@ const EditProfile = ({isOpen,onClose}) => {
                       type="file"
                       hidden
                       ref={fileRef}
-                      onChange={() => {}}
+                      onChange={handleImageChange}
                     />
                   </Stack>
                 </FormControl>
@@ -132,7 +152,7 @@ const EditProfile = ({isOpen,onClose}) => {
                     w="full"
                     _hover={{ bg: "blue.500" }}
                     onClick={handleEditProfile}
-                    // isLoading={isUpdating}
+                    isLoading={isUpdating}
                   >
                     Submit
                   </Button>
@@ -144,6 +164,6 @@ const EditProfile = ({isOpen,onClose}) => {
       </Modal>
     </div>
   );
-}
+};
 
-export default EditProfile
+export default EditProfile;
