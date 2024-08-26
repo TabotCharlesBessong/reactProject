@@ -35,6 +35,7 @@
 
       h1 {
         font-size: 88px;
+        text-transform: capitalize;
 
         @include mobile {
           font-size: 36px;
